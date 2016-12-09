@@ -17,6 +17,6 @@
 .byebug_history
 .idea/*
 leaas.iml
-doc/leaas.vpp.bak_000f
+doc/*.bak_*
 doc/*.lck
 vendor/
