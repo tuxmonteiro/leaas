@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  certificate: MyText
+  private_key: MyText
+  signing_request: MyText
+  detail: MyText
+  acme_id: MyString
+
+two:
+  certificate: MyText
+  private_key: MyText
+  signing_request: MyText
+  detail: MyText
+  acme_id: MyString
