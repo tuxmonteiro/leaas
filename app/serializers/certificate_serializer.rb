@@ -3,6 +3,8 @@ class CertificateSerializer < ActiveModel::Serializer
   #has_one :owner
 
   def links
-    _ = {rel: 'self', href: "/owners/#{object.owner.id}/certificates/#{object.id}"}
+    [
+        {rel: 'self', href: "/owners/#{object.owner.id}/certificates/#{object.id}"},
+    ]
   end
 end
