@@ -19,7 +19,7 @@ default: &default
 
 development:
   <<: *default
-  database: leaas_development
+  database: leaas
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: leaas_production
-  username: leaas
-  password: <%= ENV['LEAAS_DATABASE_PASSWORD'] %>
+  database: leaas
+  username: root
+  #password: <%= ENV['LEAAS_DATABASE_PASSWORD'] %>
