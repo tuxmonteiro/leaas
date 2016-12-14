@@ -22,6 +22,7 @@ class OwnersController < ApplicationController
     @owner = Owner.new(owner_params)
 
     if @owner.save
+      helpers.register_owner(@owner)
       render json: @owner, status: :created, location: @owner
     else
       render json: @owner.errors, status: :unprocessable_entity

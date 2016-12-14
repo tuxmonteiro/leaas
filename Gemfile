@@ -37,3 +37,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # active_model_serializers
 gem 'active_model_serializers', '0.10.3'
+
+# acme-client
+gem 'acme-client', '0.5.0'
