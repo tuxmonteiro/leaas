@@ -5,6 +5,7 @@ class CertificateSerializer < ActiveModel::Serializer
   def links
     [
         {rel: 'self', href: "/owners/#{object.owner.id}/certificates/#{object.id}"},
+        {rel: 'owner', href: "/owners/#{object.owner.id}"},
     ]
   end
 end
