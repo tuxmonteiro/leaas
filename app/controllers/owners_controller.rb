@@ -10,7 +10,11 @@ class OwnersController < ApplicationController
 
   # GET /owners/1
   def show
-    render json: @owner
+    if @owner.nil?
+      render :head => true, :status => :not_found
+    else
+      render json: @owner
+    end
   end
 
   # POST /owners
@@ -41,7 +45,11 @@ class OwnersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_owner
-      @owner = Owner.find(params[:id])
+      begin
+        @owner = Owner.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        @owner = nil
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

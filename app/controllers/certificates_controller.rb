@@ -1,19 +1,30 @@
 class CertificatesController < ApplicationController
   before_action :set_certificate, only: [:show, :update, :destroy]
 
-  # GET /certificates
+  # GET /owners/:owner_id/certificates
   def index
-    @certificates = Certificate.all
-
-    render json: @certificates
+    begin
+      @owner = Owner.find(params[:owner_id])
+      @certificates = Certificate.find_by_owner_id(params[:owner_id])
+      unless @certificates.kind_of?(Array)
+        @certificates = @certificates.nil? ? [] : [@certificates]
+      end
+      render json: @certificates
+    rescue ActiveRecord::RecordNotFound
+      render :head => true, :status => :not_found
+    end
   end
 
-  # GET /certificates/1
+  # GET /owners/:owner_id/certificates/:id
   def show
-    render json: @certificate
+    if @certificate.nil?
+      render :head => true, :status => :not_found
+    else
+      render json: @certificate
+    end
   end
 
-  # POST /certificates
+  # POST /owners/:owner_id/certificates
   def create
     @certificate = Certificate.new(certificate_params)
 
@@ -24,7 +35,7 @@ class CertificatesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /certificates/1
+  # PATCH/PUT /owners/:owner_id/certificates/:id
   def update
     if @certificate.update(certificate_params)
       render json: @certificate
@@ -33,7 +44,7 @@ class CertificatesController < ApplicationController
     end
   end
 
-  # DELETE /certificates/1
+  # DELETE /owners/:owner_id/certificates/:id
   def destroy
     @certificate.destroy
   end
@@ -41,7 +52,11 @@ class CertificatesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_certificate
-      @certificate = Certificate.find(params[:id])
+      begin
+        @certificate = Certificate.where(owner_id: params[:owner_id]).where(id: params[:id]).first!
+      rescue ActiveRecord::RecordNotFound
+        @certificate = nil
+      end
     end
 
     # Only allow a trusted parameter "white list" through.
