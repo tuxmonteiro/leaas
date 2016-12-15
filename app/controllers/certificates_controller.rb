@@ -5,10 +5,7 @@ class CertificatesController < ApplicationController
   def index
     begin
       @owner = Owner.find(params[:owner_id])
-      @certificates = Certificate.find_by_owner_id(params[:owner_id])
-      unless @certificates.kind_of?(Array)
-        @certificates = @certificates.nil? ? [] : [@certificates]
-      end
+      @certificates = Certificate.where(owner_id: params[:owner_id])
       render json: @certificates
     rescue ActiveRecord::RecordNotFound
       render :head => true, :status => :not_found
