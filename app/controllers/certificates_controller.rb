@@ -1,5 +1,11 @@
+require 'local_acme'
+
 class CertificatesController < ApplicationController
   before_action :set_certificate, only: [:show, :update, :destroy]
+
+  def initialize
+    @acme = LocalAcme.instance
+  end
 
   def certificate_url(owner)
     "/owners/#{owner.id}/certificates"
@@ -30,6 +36,7 @@ class CertificatesController < ApplicationController
     @certificate = Certificate.new(certificate_params)
 
     if @certificate.save
+      @acme.request_cert(@certificate)
       render json: @certificate, status: :created, location: @certificate
     else
       render json: @certificate.errors, status: :unprocessable_entity
