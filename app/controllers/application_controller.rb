@@ -1,7 +1,7 @@
 require 'socket'
 
 class ApplicationController < ActionController::API
-  before_filter :_set_hostname
+  before_action :_set_hostname
 
   @@hostname = nil
 
