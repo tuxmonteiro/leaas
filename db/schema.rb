@@ -38,5 +38,5 @@ ActiveRecord::Schema.define(version: 20161214011246) do
     t.index ["name"], name: "index_owners_on_name", unique: true, using: :btree
   end
 
-  add_foreign_key "certificates", "owners"
+  add_foreign_key "certificates", "owners", on_update: :cascade, on_delete: :cascade
 end

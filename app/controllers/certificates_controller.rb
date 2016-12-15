@@ -1,6 +1,10 @@
 class CertificatesController < ApplicationController
   before_action :set_certificate, only: [:show, :update, :destroy]
 
+  def certificate_url(owner)
+    "/owners/#{owner.id}/certificates"
+  end
+
   # GET /owners/:owner_id/certificates
   def index
     begin
@@ -26,7 +30,6 @@ class CertificatesController < ApplicationController
     @certificate = Certificate.new(certificate_params)
 
     if @certificate.save
-      helpers.register_certificate(@certificate)
       render json: @certificate, status: :created, location: @certificate
     else
       render json: @certificate.errors, status: :unprocessable_entity

@@ -2,18 +2,18 @@
 
 one:
   cn: MyString
-  last_crt: 
-  csr: 
-  key: 
+  last_crt: x
+  csr: x
+  key: x
   detail: MyText
   acme_id: MyString
   owner: one
 
 two:
-  cn: MyString
-  last_crt: 
-  csr: 
-  key: 
-  detail: MyText
-  acme_id: MyString
+  cn: MyString2
+  last_crt: x
+  csr: x
+  key: x
+  detail: MyText2
+  acme_id: MyString2
   owner: two
