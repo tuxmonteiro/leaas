@@ -14,37 +14,31 @@ class LocalAcme
   end
 
   def register_owner(owner)
-    registration = nil
     begin
-      registration = @client.register(contact: "mailto:#{owner.email}")
-    # rescue URI::BadURIError
+      contact = "mailto:#{owner.email}".freeze
+      registration = @client.register(contact: contact)
+      registration.agree_terms unless registration.nil?
     rescue => detail
-      puts @acme_endpoint
+      puts "#{detail.class}: #{detail.message}"
       print detail.backtrace.join("\n")
-    # puts "#{self} URI::BadURIError"
     end
-    # registration.agree_terms unless registration.nil?
   end
 
   def request_cert(certificate)
-    authorization = nil
-
     begin
       authorization = @client.authorize(domain: certificate.cn)
-    rescue URI::BadURIError
-      puts "#{self} URI::BadURIError"
-    end
-    unless authorization.nil?
       challenge = authorization.dns01
       token = challenge.token
+      puts "TOKEN: #{token}"
       add_dns_txt(certificate.cn, token)
-
-      # Once you are ready to serve the confirmation request you can proceed.
-      #challenge.request_verification
+      challenge.request_verification
 
       csr = Acme::Client::CertificateRequest.new(names: %W[ #{certificate.cn} ])
       crt = @client.new_certificate(csr)
       certificate.last_crt = crt.to_pem
+    rescue => detail
+      puts "#{detail.class}: #{detail.message}"
+      print detail.backtrace.join("\n")
     end
   end
 

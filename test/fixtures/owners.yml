@@ -2,14 +2,14 @@
 
 one:
   name: MyString
-  email: test1@localhost
+  email: contact+1@example
   pkcs12: 
   detail: MyText
   acme_id: MyString
 
 two:
   name: MyString2
-  email: test2@localhost
+  email: contact+2@example
   pkcs12: 
   detail: MyText2
   acme_id: MyString2

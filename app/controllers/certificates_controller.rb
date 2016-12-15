@@ -36,7 +36,7 @@ class CertificatesController < ApplicationController
     @certificate = Certificate.new(certificate_params)
 
     if @certificate.save
-      @acme.request_cert(@certificate)
+      #@acme.request_cert(@certificate)
       render json: @certificate, status: :created, location: @certificate
     else
       render json: @certificate.errors, status: :unprocessable_entity
