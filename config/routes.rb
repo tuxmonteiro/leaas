@@ -4,4 +4,6 @@ Rails.application.routes.draw do
       resources :certificates
     end
   end
+
+  root 'root#index'
 end
