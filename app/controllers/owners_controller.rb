@@ -5,7 +5,7 @@ class OwnersController < ApplicationController
 
   # GET /owners
   def index
-    @owners = Owner.all
+    @owners = Owner.filter(params.slice(:n, :email, :acme_id, :contains, :starts_with))
     render json: @owners
   end
 

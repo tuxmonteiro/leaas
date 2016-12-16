@@ -12,7 +12,7 @@ class CertificatesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create certificate' do
     assert_difference('Certificate.count') do
-      post owner_certificates_url(@certificate.owner.id, @certificate), params: { certificate: {
+      post owner_certificates_url(@certificate.owner.id), params: { certificate: {
           acme_id: @certificate.acme_id,
           cn: "#{@certificate.cn}.example.com",
           csr: @certificate.csr,

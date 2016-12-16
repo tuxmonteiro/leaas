@@ -6,6 +6,7 @@ class CertificateSerializer < ActiveModel::Serializer
     [
         {rel: 'self', href: "#{ApplicationController.hostname}/owners/#{object.owner.id}/certificates/#{object.id}"},
         {rel: 'owner', href: "#{ApplicationController.hostname}/owners/#{object.owner.id}"},
+        {rel: 'search', href: "#{ApplicationController.hostname}/owners/#{object.owner.id}/certificates{?n,email,acme_id,contains,starts_with}"}
     ]
   end
 end

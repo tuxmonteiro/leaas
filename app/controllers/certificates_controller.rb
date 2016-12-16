@@ -10,8 +10,7 @@ class CertificatesController < ApplicationController
   # GET /owners/:owner_id/certificates
   def index
     begin
-      @owner = Owner.find(params[:owner_id])
-      @certificates = Certificate.where(owner_id: params[:owner_id])
+      @certificates = Certificate.where(owner_id: params[:owner_id]).filter(params.slice(:cn, :acme_id, :contains, :starts_with))
       render json: @certificates
     rescue ActiveRecord::RecordNotFound
       render :head => true, :status => :not_found
