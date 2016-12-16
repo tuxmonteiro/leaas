@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'openssl'
 
 class OwnersControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -18,7 +17,7 @@ class OwnersControllerTest < ActionDispatch::IntegrationTest
           detail:@owner.detail,
           email: "#{@owner.email}.com",
           name: "#{@owner.name}_test",
-          private_pem: OpenSSL::PKey::RSA.new(4096).to_pem
+          private_pem: @owner.private_pem
       } }
     end
 
@@ -36,7 +35,7 @@ class OwnersControllerTest < ActionDispatch::IntegrationTest
         detail:@owner.detail,
         email: "#{@owner.email}.com",
         name: "#{@owner.name}_test",
-        private_pem: OpenSSL::PKey::RSA.new(4096).to_pem
+        private_pem: @owner.private_pem
     } }
     assert_response 200
   end

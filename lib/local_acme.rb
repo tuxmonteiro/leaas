@@ -30,6 +30,8 @@ class LocalAcme
       csr = Acme::Client::CertificateRequest.new(names: %W[ #{certificate.cn} ])
       crt = client.new_certificate(csr)
       certificate.last_crt = crt.to_pem
+    rescue Acme::Client::Error::Unauthorized => detail
+      puts "#{detail.class}: #{detail.message}"
     rescue => detail
       puts "#{detail.class}: #{detail.message}"
       print detail.backtrace.join("\n")
@@ -39,12 +41,15 @@ class LocalAcme
   private
   def _new_client(owner)
     begin
-      private_key = OpenSSL::PKey::RSA.new(owner.private_pem)
+      return nil if owner.nil? or owner.private_pem.nil?
+      pem = owner.private_pem.split('@').join(10.chr)
+      private_key = OpenSSL::PKey::RSA.new(pem)
       client = Acme::Client.new(private_key: private_key,
                                 endpoint: @acme_endpoint,
                                 connection_options: {request: {open_timeout: 5, timeout: 5}})
       return client
-    rescue Exception
+    rescue => detail
+      puts "#{detail.class}: #{detail.message}"
       return nil
     end
   end
