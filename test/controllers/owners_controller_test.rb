@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'openssl'
 
 class OwnersControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -12,7 +13,13 @@ class OwnersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create owner' do
     assert_difference('Owner.count') do
-      post owners_url, params: { owner: { acme_id:@owner.acme_id, detail:@owner.detail, email: "#{@owner.email}.com", name: "#{@owner.name}_test", pkcs12:@owner.pkcs12 } }
+      post owners_url, params: { owner: {
+          acme_id:@owner.acme_id,
+          detail:@owner.detail,
+          email: "#{@owner.email}.com",
+          name: "#{@owner.name}_test",
+          private_pem: OpenSSL::PKey::RSA.new(4096).to_pem
+      } }
     end
 
     assert_response 201
@@ -24,7 +31,13 @@ class OwnersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update owner' do
-    patch owner_url(@owner), params: { owner: { acme_id:@owner.acme_id, detail:@owner.detail, email: "#{@owner.email}.com", name: "#{@owner.name}_test", pkcs12:@owner.pkcs12 } }
+    patch owner_url(@owner), params: { owner: {
+        acme_id:@owner.acme_id,
+        detail:@owner.detail,
+        email: "#{@owner.email}.com",
+        name: "#{@owner.name}_test",
+        private_pem: OpenSSL::PKey::RSA.new(4096).to_pem
+    } }
     assert_response 200
   end
 

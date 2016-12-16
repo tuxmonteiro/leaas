@@ -1,5 +1,5 @@
 class OwnerSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :pkcs12, :detail, :acme_id, :links
+  attributes :id, :name, :email, :private_pem, :detail, :acme_id, :links
 
   def links
     [

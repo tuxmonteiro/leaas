@@ -27,13 +27,13 @@ ActiveRecord::Schema.define(version: 20161214011246) do
   end
 
   create_table "owners", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",                     null: false
-    t.string   "email",                    null: false
-    t.text     "pkcs12",     limit: 65535
-    t.text     "detail",     limit: 65535
+    t.string   "name",                      null: false
+    t.string   "email",                     null: false
+    t.text     "private_pem", limit: 65535
+    t.text     "detail",      limit: 65535
     t.string   "acme_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["email"], name: "index_owners_on_email", unique: true, using: :btree
     t.index ["name"], name: "index_owners_on_name", unique: true, using: :btree
   end

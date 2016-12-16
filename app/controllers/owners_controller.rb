@@ -3,14 +3,9 @@ require 'local_acme'
 class OwnersController < ApplicationController
   before_action :set_owner, only: [:show, :update, :destroy]
 
-  def initialize
-    @acme = LocalAcme.instance
-  end
-
   # GET /owners
   def index
     @owners = Owner.all
-
     render json: @owners
   end
 
@@ -28,7 +23,6 @@ class OwnersController < ApplicationController
     @owner = Owner.new(owner_params)
 
     if @owner.save
-      @acme.register_owner(@owner)
       render json: @owner, status: :created, location: @owner
     else
       render json: @owner.errors, status: :unprocessable_entity

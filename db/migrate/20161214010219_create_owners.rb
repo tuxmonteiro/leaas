@@ -3,7 +3,7 @@ class CreateOwners < ActiveRecord::Migration[5.0]
     create_table :owners do |t|
       t.string :name, null: false
       t.string :email, null: false
-      t.text :pkcs12, limit: 64.kilobytes-1
+      t.text :private_pem, limit: 64.kilobytes-1
       t.text :detail
       t.string :acme_id
 
