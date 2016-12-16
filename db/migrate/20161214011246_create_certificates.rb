@@ -3,7 +3,6 @@ class CreateCertificates < ActiveRecord::Migration[5.0]
     create_table :certificates do |t|
       t.string :cn, null: false
       t.text :last_crt, limit: 64.kilobytes-1
-      t.text :last_crt, limit: 64.kilobytes-1
       t.text :csr, limit: 64.kilobytes-1
       t.text :key, limit: 16.kilobytes
       t.text :detail
