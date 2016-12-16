@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  cn: MyString
+  cn: site1
   last_crt: x
   csr: x
   key: x
@@ -10,7 +10,7 @@ one:
   owner: one
 
 two:
-  cn: MyString2
+  cn: site2
   last_crt: x
   csr: x
   key: x
