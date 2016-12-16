@@ -1,5 +1,3 @@
-require 'local_acme'
-
 class CertificatesController < ApplicationController
   before_action :set_certificate, only: [:show, :update, :destroy]
 

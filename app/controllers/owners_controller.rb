@@ -1,5 +1,3 @@
-require 'local_acme'
-
 class OwnersController < ApplicationController
   before_action :set_owner, only: [:show, :update, :destroy]
 
